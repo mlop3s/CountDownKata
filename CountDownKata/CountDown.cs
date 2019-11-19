@@ -35,7 +35,7 @@ namespace CountDownKata
             set
             {
                 Set(ref _current, value);
-                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(CounterString));
             }
         }
 
@@ -47,19 +47,17 @@ namespace CountDownKata
             }
         }
 
-
         public void StartTime()
-        {
-           
+        {           
             Current = new TimeSpan(0,15,0);
             if (_cancelationSource == null)
             {
                 _cancelationSource = new CancellationTokenSource();
-                RunPeriodic(100, _cancelationSource.Token, () => Current = Current.Add(TimeSpan.FromMilliseconds(100) ));
+                RunPeriodic(100, _cancelationSource.Token, () => Current = (Current.Add(TimeSpan.FromMilliseconds(-100) ))).ConfigureAwait(true);
             }
         }
 
-        public static async Task RunPeriodic(int milliseconds, CancellationToken token, Action action)
+        public async Task RunPeriodic(int milliseconds, CancellationToken token, Action action)
         {
             while (!token.IsCancellationRequested)
             {
