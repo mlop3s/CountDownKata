@@ -19,9 +19,9 @@ namespace CountDownKata.Tests
         {
             // TODO: Add your test code here
             var countDown = new CountDown();
-            countDown.Time = new TimeSpan(10, 14, 15);
-            var millis = countDown.Time.TotalMilliseconds;
-            countDown.StartTime();
+            countDown.StartTime = new TimeSpan(10, 14, 15);
+            var millis = countDown.StartTime.TotalMilliseconds;
+            countDown.StartCounter();
             Thread.Sleep(1000);
             Assert.That(countDown.Current.TotalMilliseconds, Is.LessThan(millis), "must be less");
         }

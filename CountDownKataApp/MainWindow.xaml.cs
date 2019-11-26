@@ -26,7 +26,6 @@ namespace CountDownKataApp
             InitializeComponent();
             var cd = new CountDown();
             DataContext = cd;
-            cd.StartTime();
         }
     }
 }

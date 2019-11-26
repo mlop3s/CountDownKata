@@ -4,12 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CountDownKataApp"
+        xmlns:controls="clr-namespace:MediCommonControls.Controls;assembly=MediCommonControls"
+        xmlns:converters="clr-namespace:MediCommonControls.Converters;assembly=MediCommonControls"
+        SizeToContent="WidthAndHeight"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="170" Margin="98,182,0,0" TextWrapping="Wrap" Text="{Binding CounterString, Mode=OneWay}" VerticalAlignment="Top" Width="518"
-                 TextElement.FontSize ="42"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="441,115,0,0" VerticalAlignment="Top" Width="75"/>
+        Title="MainWindow" >
+    <DockPanel Margin="6">
+        <UniformGrid DockPanel.Dock="Bottom">
+            <Button Content="Start" Width="75" Margin="6" Command="{Binding StartCommand}"/>
+            <Button Content="Stop" Width="75" Margin="6" Command="{Binding StopCommand}"/>
+        </UniformGrid>
 
-    </Grid>
+        <UniformGrid DockPanel.Dock="Top">
+            <StackPanel Margin="6">
+                <TextBlock Text="Minutes" />
+                <TextBox Text="{Binding Minutes, UpdateSourceTrigger=PropertyChanged, Delay=100}" MinWidth="20"/>
+            </StackPanel>
+            <StackPanel Margin="6">
+                <TextBlock Text="Seconds" />
+                <TextBox Text="{Binding Seconds, UpdateSourceTrigger=PropertyChanged, Delay=100}"/>
+            </StackPanel>
+        </UniformGrid>
+
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+                <TextBlock Text="Elapsed" Margin="6"/>
+                <TextBox Text="{Binding ElapsedString}"                      
+                    TextElement.FontSize ="12"
+                     MinWidth="0"/>
+            </StackPanel>
+            <TextBox Text="{Binding CounterString, Mode=OneWay}" VerticalAlignment="Top" 
+                 TextElement.FontSize ="42"
+                     Background="{Binding Background}"/>
+        </DockPanel>
+
+    </DockPanel>
 </Window>
