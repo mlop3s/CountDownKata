@@ -95,7 +95,7 @@ namespace CountDownKata
         {
             get
             {
-                return Current.ToString(@"hh\:ss");
+                return Current.ToString(@"mm\:ss");
             }
         }
 
@@ -164,10 +164,10 @@ namespace CountDownKata
 
         private void UpdateCounter()
         {
-            if (Elapsed.TotalMilliseconds >= StartTime.TotalMilliseconds)
-            {
-                return;
-            }
+            //if (Elapsed.TotalMilliseconds >= StartTime.TotalMilliseconds)
+            //{
+            //    return;
+            //}
 
             Elapsed = Elapsed.Add(TimeSpan.FromMilliseconds(+100));
             ElapsedString = Elapsed.ToString(@"mm\:ss");
