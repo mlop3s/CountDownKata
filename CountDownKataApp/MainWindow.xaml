@@ -31,7 +31,8 @@
                 <TextBlock Text="Elapsed" Margin="6"/>
                 <TextBox Text="{Binding ElapsedString}"                      
                     TextElement.FontSize ="12"
-                     MinWidth="0"/>
+                     MinWidth="50"
+                         Margin="6"/>
             </StackPanel>
             <TextBox Text="{Binding CounterString, Mode=OneWay}" VerticalAlignment="Top" 
                  TextElement.FontSize ="42"

@@ -164,14 +164,19 @@ namespace CountDownKata
 
         private void UpdateCounter()
         {
+            if (Elapsed.TotalMilliseconds >= StartTime.TotalMilliseconds)
+            {
+                return;
+            }
 
-           Elapsed = Elapsed.Add(TimeSpan.FromMilliseconds(+100));
+            Elapsed = Elapsed.Add(TimeSpan.FromMilliseconds(+100));
             ElapsedString = Elapsed.ToString(@"mm\:ss");
             Current = StartTime.Subtract(Elapsed);
             if (Current.TotalMilliseconds <= StartTime.TotalMilliseconds * 0.4)
             {
                 Background = Brushes.Red;
             }
+
         }
 
         public async Task RunPeriodic(int milliseconds, CancellationToken token, Action action)
