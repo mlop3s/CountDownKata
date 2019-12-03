@@ -9,7 +9,7 @@ namespace CountDownKata
 {
     public sealed class CountDown : ViewModelBase, IDisposable
     {
-        private TimeSpan _time = TimeSpan.FromSeconds(10);
+        
         private CancellationTokenSource _cancelationSource;
 
         public CountDown()
@@ -25,6 +25,7 @@ namespace CountDownKata
 
         private void Stop()
         {
+            Elapsed = TimeSpan.FromSeconds(0);
             _cancelationSource?.Cancel();
             _cancelationSource = null;
             StartCommand.RaiseCanExecuteChanged();
@@ -63,14 +64,10 @@ namespace CountDownKata
         {
             get
             {
-                return _time;
+                return TimeSpan.FromMinutes(Minutes).Add(TimeSpan.FromSeconds(Seconds + 1)).Subtract(TimeSpan.FromMilliseconds(1));;
             }
 
-            set
-            {
-                Set(ref _time, value);
-            }
-        }
+         }
 
         private TimeSpan _current;
         private bool _disposed;
@@ -150,7 +147,6 @@ namespace CountDownKata
         public void StartCounter()
         {           
             Background = Brushes.White;
-            StartTime = TimeSpan.FromMinutes(Minutes).Add(TimeSpan.FromSeconds(Seconds + 1)).Subtract(TimeSpan.FromMilliseconds(1));
             Current = StartTime;
             if (_cancelationSource == null)
             {
